@@ -34,6 +34,7 @@ import net.minecraftforge.fluids.capability.templates.FluidHandlerItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.tuple.Pair;
 
 import javax.annotation.Nullable;
 import java.io.IOException;
@@ -60,7 +61,7 @@ public class TileEntityDrum extends MetaTileEntity {
     public int getLightOpacity() {
         return 1;
     }
-  
+
     @Override
     public int getActualComparatorValue() {
         FluidTank fluidTank = this.fluidTank;
@@ -90,7 +91,7 @@ public class TileEntityDrum extends MetaTileEntity {
         super.initializeInventory();
         this.fluidTank = new SyncFluidTank(tankSize);
         this.fluidInventory = fluidTank;
-        updateComparatorValue();
+        // updateComparatorValue();
     }
 
     @Override
@@ -168,10 +169,10 @@ public class TileEntityDrum extends MetaTileEntity {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public TextureAtlasSprite getParticleTexture() {
-        return material.toString().contains("wood") ?
+    public Pair<TextureAtlasSprite,Integer> getParticleTexture() {
+        return Pair.of(material.toString().contains("wood") ?
                 GATextures.BARREL.getParticleTexture() :
-                GATextures.DRUM.getParticleTexture();
+                GATextures.DRUM.getParticleTexture(), 0xFFFFFF);
     }
 
     @Override
@@ -241,7 +242,7 @@ public class TileEntityDrum extends MetaTileEntity {
 
         @Override
         protected void onFluidChanged(FluidStack newFluidStack, FluidStack oldFluidStack) {
-            updateComparatorValue();
+            // updateComparatorValue();
             if (getWorld() != null && !getWorld().isRemote) {
                 onContentsChangedOnServer(newFluidStack, oldFluidStack);
             }

@@ -1,7 +1,7 @@
 buildscript {
     repositories {
         jcenter()
-        maven { url = "http://files.minecraftforge.net/maven" }
+        maven { url = "https://maven.minecraftforge.net/" }
     }
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
@@ -45,10 +45,10 @@ repositories {
         name = "CraftTweaker Maven"
         url = "https://maven.blamejared.com/"
     }
-    maven {
-        name = "Forestry Maven"
-        url = "http://maven.ic2.player.to"
-    }
+    // maven {
+    //     name = "Forestry Maven"
+    //     url = "http://maven.ic2.player.to"
+    // }
 }
 
 dependencies {
@@ -57,11 +57,13 @@ dependencies {
     deobfCompile "codechicken:ForgeMultipart:${minecraft_version}-${multipart_version}:deobf"
     deobfCompile "CraftTweaker2:CraftTweaker2-MC${stripped_version}-Main:${crafttweaker_version}"
     deobfCompile "mezz.jei:jei_${minecraft_version}:${jei_version}"
-    deobfCompile "net.sengir.forestry:forestry_${minecraft_version}:${forestry_version}"
+    // deobfCompile "net.sengir.forestry:forestry_${minecraft_version}:${forestry_version}"
     deobfCompile "slimeknights.mantle:Mantle:${short_version}-${mantle_version}"
     deobfCompile "slimeknights:TConstruct:${minecraft_version}-${tconstruct_version}"
+    compile files("libs/forestry_${minecraft_version}-${forestry_version}.jar")
     compile files("libs/gregtech-${minecraft_version}-${gt_version}.jar")
     compile files("libs/GTCEBees-${minecraft_version}-${gtcebees_version}.jar")
+    compile files("libs/CTM-MC1.12.2-1.0.2.31.jar")
 }
 
 processResources {
@@ -70,10 +72,10 @@ processResources {
 
     from(sourceSets.main.resources.srcDirs) {
         include 'mcmod.info'
-                
+
         expand 'version':project.version, 'mcversion':project.minecraft.version
     }
-        
+
     from(sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
     }

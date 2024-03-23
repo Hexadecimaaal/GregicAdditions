@@ -22,7 +22,7 @@ public class NoEURecipeBuilder extends RecipeBuilder<NoEURecipeBuilder> {
     }
 
     public ValidationResult<Recipe> build() {
-        return ValidationResult.newResult(this.finalizeAndValidate(), new Recipe(this.inputs, this.outputs, this.chancedOutputs, this.fluidInputs, this.fluidOutputs, ImmutableMap.of(), this.duration, this.EUt, this.hidden, this.needsEmptyOutput));
+        return ValidationResult.newResult(this.finalizeAndValidate(), new Recipe(this.inputs, this.outputs, this.chancedOutputs, this.fluidInputs, this.fluidOutputs, ImmutableMap.of(), this.duration, this.EUt, this.hidden));
     }
 
     protected EnumValidationResult validate() {
